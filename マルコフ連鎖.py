@@ -19,18 +19,17 @@ with open("res.txt",encoding="UTF-8") as f:
     for centence in f:
         centence_list=centence.split()
         wordlist = ["<SOS>"] + centence_list + ["<EOS>"]
-        add_rate([("<SOS>",wordlist[1])])
-        add_rate(zip(map("".join,zip(wordlist,wordlist[1:])),wordlist[2:]))
+        add_rate([(("<SOS>",),wordlist[1])])
+        add_rate(zip(zip(wordlist,wordlist[1:]),wordlist[2:]))
 
 print(rate)
-#['<SOS>', 'ちなみに', 'LOL', '入れ', 'てる', 'ん', '？', '<EOS>']
 
 import time
 while True:
     words=["<SOS>"]
     i=-1
     while True:
-        word=random.choices(list(rate["".join(words[i:i+2])].keys()),list(rate["".join(words[i:i+2])].values()))[0]
+        word=random.choices(list(rate[tuple(words[i:i+2])].keys()),list(rate[tuple(words[i:i+2])].values()))[0]
         if word=="<EOS>":
             break
         words.append(word)
