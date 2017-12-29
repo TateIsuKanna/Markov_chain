@@ -1,5 +1,5 @@
 # Markov_chain
-2階マルコフ連鎖で文章生成するTwitterbot
+2階マルコフ連鎖で文章生成する(Twitterbotもあるよ)
 
 ## Required
 https://github.com/sixohsix/twitter
