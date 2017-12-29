@@ -15,13 +15,13 @@ def add_rate(list):
         else:
             rate[left]={right:1}
 
-all_centences=set()
+all_sentences=set()
 
 with open("res.txt",encoding="UTF-8") as f:
-    for centence in f:
-        centence_list=centence.split()
-        all_centences.add("".join(centence_list))
-        wordlist = ["<SOS>"] + centence_list + ["<EOS>"]
+    for sentence in f:
+        sentence_list=sentence.split()
+        all_sentences.add("".join(sentence_list))
+        wordlist = ["<SOS>"] + sentence_list + ["<EOS>"]
         add_rate([(("<SOS>",),wordlist[1])])
         add_rate(zip(zip(wordlist,wordlist[1:]),wordlist[2:]))
 
@@ -35,7 +35,7 @@ while True:
             break
         words.append(word)
         i+=1
-    centense="".join(words[1:])
-    if centense not in all_centences:
-        print(centense)
+    sentence="".join(words[1:])
+    if sentence not in all_sentences:
+        print(sentence)
         time.sleep(2)
