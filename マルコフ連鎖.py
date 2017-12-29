@@ -17,7 +17,12 @@ def add_rate(list):
 
 all_sentences=set()
 
-with open("res.txt",encoding="UTF-8") as f:
+import sys
+if len(sys.argv)==2:
+    spaced_path=sys.argv[1]
+else:
+    spaced_path="res.txt"
+with open(spaced_path,encoding="UTF-8") as f:
     for sentence in f:
         sentence_list=sentence.split()
         all_sentences.add("".join(sentence_list))
