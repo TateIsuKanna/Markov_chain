@@ -43,20 +43,23 @@ with open(spaced_path,encoding="UTF-8") as f:
 
 import time
 while True:
-    words=["<SOS>"]
-    i=-1
-    while True:
-        word=random.choices(list(rate[tuple(words[i:i+2])].keys()),list(rate[tuple(words[i:i+2])].values()))[0]
-        if word=="<EOS>":
-            break
-        words.append(word)
-        i+=1
-    sentence="".join(words[1:])
-    if sentence not in all_sentences:
-        now=datetime.datetime.now()
-        print(tweet_rate[now.weekday()][now.hour],tweet_rate[now.weekday()][now.hour]*tweet_per_hour*24/60*100,"%")
-        print(sentence)
-        if random.random()<tweet_rate[now.weekday()][now.hour]*tweet_per_hour*24/60:
-            print("ツイートしました")
-            t.statuses.update(status=sentence)
-        time.sleep(60)
+    try:
+        words=["<SOS>"]
+        i=-1
+        while True:
+            word=random.choices(list(rate[tuple(words[i:i+2])].keys()),list(rate[tuple(words[i:i+2])].values()))[0]
+            if word=="<EOS>":
+                break
+            words.append(word)
+            i+=1
+        sentence="".join(words[1:])
+        if sentence not in all_sentences:
+            now=datetime.datetime.now()
+            print(tweet_rate[now.weekday()][now.hour],tweet_rate[now.weekday()][now.hour]*tweet_per_hour*24/60*100,"%")
+            print(sentence)
+            if random.random()<tweet_rate[now.weekday()][now.hour]*tweet_per_hour*24/60:
+                print("ツイートしました")
+                t.statuses.update(status=sentence)
+            time.sleep(60)
+    except:
+        print(sys.exc_info)
