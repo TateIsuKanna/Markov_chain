@@ -56,11 +56,11 @@ while True:
                     words.append(word)
                     i+=1
                 sentence="".join(words[1:])
-                if sentence not in all_sentences:
+                if all([sentence not in sen for sen in all_sentences]):
                     break
             print(tweet_rate[now.weekday()][now.hour],tweet_rate[now.weekday()][now.hour]*tweet_per_hour*24/60*100,"%")
             print(sentence)
             t.statuses.update(status=sentence)
         time.sleep(60)
     except:
-        print(sys.exc_info)
+        print(sys.exc_info())
