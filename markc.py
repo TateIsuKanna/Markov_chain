@@ -32,15 +32,20 @@ with open(spaced_path,encoding="UTF-8") as f:
 
 import time
 while True:
-    words=["<SOS>"]
-    i=-1
-    while True:
-        word=random.choices(list(rate[tuple(words[i:i+2])].keys()),list(rate[tuple(words[i:i+2])].values()))[0]
-        if word=="<EOS>":
-            break
-        words.append(word)
-        i+=1
-    sentence="".join(words[1:])
-    if sentence not in all_sentences:
+    try:
+        while True:
+            words=["<SOS>"]
+            i=-1
+            while True:
+                word=random.choices(list(rate[tuple(words[i:i+2])].keys()),list(rate[tuple(words[i:i+2])].values()))[0]
+                if word=="<EOS>":
+                    break
+                words.append(word)
+                i+=1
+            sentence="".join(words[1:])
+            if all([sentence not in sen for sen in all_sentences]):
+                break
         print(sentence)
         time.sleep(2)
+    except:
+        print(sys.exc_info())
